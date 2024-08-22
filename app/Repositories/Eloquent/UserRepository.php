@@ -17,12 +17,18 @@ class UserRepository implements UserRepositoryInterface
     public function login(array $data)
     {
 
-       //
+        $user = $this->model->where('email', $data['email'])->first();
+
+        if (!$user || !\Hash::check($data['password'], $user->password)) {
+            return null;
+        }
+
+        return $user;
     }
 
     public function register(array $data)
     {
-        //
+        return $this->model->create($data);
     }
 
 }
