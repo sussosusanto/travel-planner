@@ -43,7 +43,7 @@ services:
       dockerfile: Dockerfile
     container_name: php
     volumes:
-      - .:/var/www/html
+      - php_data:/var/www/html
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
