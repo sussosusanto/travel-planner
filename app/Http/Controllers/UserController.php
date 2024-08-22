@@ -78,6 +78,8 @@ class UserController extends Controller
             ], StatusCode::CREATED);
 
         } catch (\Exception $e) {
+
+            Log::error($e->getMessage());
             if ($e instanceof \Illuminate\Validation\ValidationException) {
                 return response()->json([
                     'message' => 'Validation Error',
