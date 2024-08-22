@@ -14,28 +14,40 @@ class TravelRepository implements TravelRepositoryInterface
         $this->model = $model;
     }
 
-    public function all()
+    public function paginate($perPage)
     {
-        //
+        return $this->model->where('user_id', auth()->id())->paginate($perPage);
     }
 
     public function find($id)
     {
-        //
+        return $this->model->where('user_id', auth()->id())->find($id);
     }
 
     public function create(array $data)
     {
-        //
+        return $this->model->create($data);
     }
 
     public function update($id, array $data)
     {
-        //
+        $travel = $this->model->where('user_id', auth()->id())->find($id);
+
+        if (!$travel) {
+            return false;
+        }
+
+        return $travel->update($data);
     }
 
     public function delete($id)
     {
-        //
+        $travel = $this->model->where('user_id', auth()->id())->find($id);
+
+        if (!$travel) {
+            return false;
+        }
+
+        return $travel->delete();
     }
 }
