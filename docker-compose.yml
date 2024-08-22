@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+    db:
+        image: mysql:latest
+        container_name: mysql-container
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: laravel
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: laravel
+        volumes:
+            - db_data:/var/lib/mysql
+        ports:
+            - "0.0.0.0:3306:3306"
+        
+
+    redis:
+        image: redis:latest
+        container_name: redis-container
+        restart: always
+        volumes:
+            - redis_data:/data
+        ports:
+            - "0.0.0.0:6379:6379"
+
+volumes:
+    db_data:
+    redis_data:
